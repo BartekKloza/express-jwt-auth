@@ -1,7 +1,4 @@
-
-
-    module.exports = {
-              singleQuote: true,
-              trailingComma: true
-      };
-      
+module.exports = {
+  singleQuote: true,
+  trailingComma: true,
+};

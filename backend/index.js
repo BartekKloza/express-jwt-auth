@@ -2,7 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const routes = require('./routes/routes.js');
+const userRoutes = require('./routes/user-routes.js');
+const authRoutes = require('./routes/auth-routes.js');
 
 const app = express();
 const port = 3001;
@@ -24,7 +25,8 @@ mongoose.set('useFindAndModify', false);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
-app.use('/api', routes);
+app.use('/api/user', userRoutes);
+app.use('/api/auth', authRoutes);
 
 app.listen(port, () =>
   console.log(`Express server listening on port ${port}!`)
