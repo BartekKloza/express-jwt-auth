@@ -4,14 +4,11 @@ const User = require('../schemas/user-schema');
 
 const router = express.Router();
 
-router.post('/newuser', async (req, res) => {
+module.exports = router;
+
+router.get('/getuser/:id', async (req, res) => {
   try {
-    // TODO: need to check if email exists as well (if email added to schema)
-    const doesUserExist = await User.exists({ username: req.body.username });
-    if (doesUserExist)
-      return res
-        .status(400)
-        .json({ handledError: true, message: 'User already exists!' });
+    const user = User.findById(req.params._id);
     const encryptedPassword = await bcrypt.hash(req.body.password, 10);
     const newUser = new User({
       username: req.body.username,
@@ -24,5 +21,3 @@ router.post('/newuser', async (req, res) => {
     return res.status(400).json({ handledError: false, error });
   }
 });
-
-module.exports = router;
